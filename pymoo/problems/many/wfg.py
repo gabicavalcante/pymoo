@@ -33,7 +33,7 @@ class WFG(Problem):
             self.l = n_var - self.k
         
         if seed:
-            random.seed(seed)
+            np.random.seed(seed)
 
         self.validate(self.l, self.k, self.n_obj)
 

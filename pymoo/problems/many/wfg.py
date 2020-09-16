@@ -32,8 +32,9 @@ class WFG(Problem):
         else:
             self.l = n_var - self.k
         
+        self.seed = None
         if seed:
-            np.random.seed(seed)
+            self.seed = seed
 
         self.validate(self.l, self.k, self.n_obj)
 
@@ -58,6 +59,8 @@ class WFG(Problem):
         return x[:, -1][:, None] + s * np.column_stack(h)
 
     def _rand_optimal_position(self, n):
+        if self.seed:
+            np.random.seed(self.seed)
         return np.random.random((n, self.k))
 
     def _positional_to_optimal(self, K):
@@ -125,6 +128,8 @@ class WFG1(WFG):
         out["F"] = self._calculate(y, self.S, h)
 
     def _rand_optimal_position(self, n):
+        if self.seed:
+            np.random.seed(self.seed)
         return np.power(np.random.random((n, self.k)), 50.0)
 
 

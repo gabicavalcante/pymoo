@@ -7,7 +7,7 @@ from pymoo.util.misc import powerset
 
 class WFG(Problem):
 
-    def __init__(self, n_var, n_obj, k=None, l=None, **kwargs):
+    def __init__(self, n_var, n_obj, seed=None, k=None, l=None, **kwargs):
         super().__init__(n_var=n_var,
                          n_obj=n_obj,
                          n_constr=0,
@@ -31,6 +31,9 @@ class WFG(Problem):
             self.l = l
         else:
             self.l = n_var - self.k
+        
+        if seed:
+            random.seed(seed)
 
         self.validate(self.l, self.k, self.n_obj)
 
